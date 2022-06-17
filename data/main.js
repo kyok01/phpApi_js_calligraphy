@@ -1,1 +1,1 @@
-document.querySelector("p").innerHTML="change"
+document.querySelector("h2").innerHTML="change";
