@@ -22,5 +22,6 @@ $file = fopen("./data/style.css", "w" ); //ファイルOPEN
 fwrite( $file, $css); //書込みです
 fclose( $file ); //ファイル閉じる
 
+clearstatcache(); // cashe clear
 echo $html;
 ?>
