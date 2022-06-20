@@ -30,14 +30,17 @@ if(file_exists($directory_path)){
 
 // process about file
 $file = fopen("./data/folder{$artId}/sample.html", "w" ); //ファイルOPEN
+clearstatcache(); // cashe clear
 fwrite( $file, $html); //書込みです
 fclose( $file ); //ファイル閉じる
 
 $file = fopen("./data/folder{$artId}/main.js", "w" ); //ファイルOPEN
+clearstatcache(); // cashe clear
 fwrite( $file, $js); //書込みです
 fclose( $file ); //ファイル閉じる
 
 $file = fopen("./data/folder{$artId}/style.css", "w" ); //ファイルOPEN
+clearstatcache(); // cashe clear
 fwrite( $file, $css); //書込みです
 fclose( $file ); //ファイル閉じる
 
