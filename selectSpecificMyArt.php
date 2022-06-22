@@ -14,7 +14,7 @@ $pdo = db_conn();      //DB接続関数
 
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM mypage_art WHERE lid=:lid AND name LIKE :keyword");
+$stmt = $pdo->prepare("SELECT * FROM mypage_art WHERE lid=:lid AND CONCAT(name, ini_html, ini_js, ini_css, tags, uses, note) LIKE :keyword");
 $stmt->bindValue(":lid", $lid, PDO::PARAM_STR);
 $stmt->bindValue(":keyword", '%'.$keyword.'%', PDO::PARAM_STR);
 $status = $stmt->execute();
