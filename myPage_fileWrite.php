@@ -12,6 +12,31 @@ $html = $_POST["html"];
 $js = $_POST["js"];
 $css = $_POST["css"];
 
+
+$showErrorScript = <<<EOF
+window.onerror = function (e) {
+    let errorEle = document.createElement("div");
+    errorEle.id = "errorStr";
+    errorEle.append("Error:"+e);
+    document.querySelector("body").append(errorEle);
+    const redirectSERP = () => {
+        window.open("https://www.google.co.jp/search?site=&source=hp&q="+e , '_blank')
+    }
+    errorEle.addEventListener("click", redirectSERP);
+    let errorStl = errorEle.style;
+    errorStl.position = "fixed";
+    errorStl.bottom = "0px";
+    errorStl.zIndex = "9999";
+    errorStl.width = "100%";
+    errorStl.padding = "25px";
+    errorStl.background = "red";
+    errorStl.color = "white";
+    errorStl.cursor = "pointer";
+}
+
+
+EOF;
+
 // process about directory
 $directory_path = "./user/${lid}/folder{$artId}";
 
@@ -37,7 +62,7 @@ fclose( $file ); //ファイル閉じる
 
 $file = fopen("./user/${lid}/folder{$artId}/main.js", "w" ); //ファイルOPEN
 clearstatcache(); // cashe clear
-fwrite( $file, $js); //書込みです
+fwrite( $file, $showErrorScript.$js); //書込みです
 fclose( $file ); //ファイル閉じる
 
 $file = fopen("./user/${lid}/folder{$artId}/style.css", "w" ); //ファイルOPEN
